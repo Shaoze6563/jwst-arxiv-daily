@@ -21,6 +21,9 @@
     "CEERS",
     "PRIMER",
     "FRESCO"
+    "COSMOS"
+    "COSMOS-Web"
+    "COSMOS-3D"
   ],
   "lookback_days": 14,
   "max_results": 300,
@@ -44,6 +47,11 @@
     "dust attenuation",
     "metallicity",
     "morphology"
+    "HAE"
+    "DSFGs"
+    "DSFG"
+    "Dusty star-forming galaxy"
+    "Dusty star-forming galaxies"
   ],
   "report_directory": "reports",
   "state_file": "data/seen.json",
