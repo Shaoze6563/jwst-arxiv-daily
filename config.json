@@ -1,0 +1,51 @@
+{
+  "categories": [
+    "astro-ph.GA",
+    "astro-ph.CO",
+    "astro-ph.EP",
+    "astro-ph.IM"
+  ],
+  "contact_email": "replace-with-your-email@example.com",
+  "galaxy_terms": [
+    "galaxy",
+    "galaxies",
+    "extragalactic"
+  ],
+  "jwst_terms": [
+    "JWST",
+    "James Webb Space Telescope",
+    "NIRCam",
+    "NIRSpec",
+    "MIRI",
+    "JADES",
+    "CEERS",
+    "PRIMER",
+    "FRESCO"
+  ],
+  "lookback_days": 14,
+  "max_results": 300,
+  "minimum_score": 5,
+  "related_terms": [
+    "high redshift",
+    "high-z",
+    "reionization",
+    "cosmic dawn",
+    "star formation",
+    "stellar mass",
+    "stellar population",
+    "active galactic nucleus",
+    "AGN",
+    "emission line",
+    "H-alpha",
+    "Halpha",
+    "spectral energy distribution",
+    "SED fitting",
+    "quiescent",
+    "dust attenuation",
+    "metallicity",
+    "morphology"
+  ],
+  "report_directory": "reports",
+  "state_file": "data/seen.json",
+  "timezone": "Asia/Singapore"
+}
