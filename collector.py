@@ -9,6 +9,8 @@ import html
 import json
 import re
 import sys
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -22,6 +24,8 @@ from zoneinfo import ZoneInfo
 ATOM = {"atom": "http://www.w3.org/2005/Atom"}
 ARXIV_API = "https://export.arxiv.org/api/query"
 DEFAULT_CONFIG = Path(__file__).with_name("config.json")
+RETRYABLE_HTTP_CODES = {429, 500, 502, 503, 504}
+RETRY_DELAYS_SECONDS = (15, 30, 60, 120)
 
 
 @dataclass(frozen=True)
@@ -176,8 +180,27 @@ def fetch_papers(config: dict[str, Any]) -> list[Paper]:
             "Accept": "application/atom+xml",
         },
     )
-    with urllib.request.urlopen(request, timeout=60) as response:
-        return parse_atom(response.read())
+    for attempt in range(len(RETRY_DELAYS_SECONDS) + 1):
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                return parse_atom(response.read())
+        except urllib.error.HTTPError as exc:
+            if exc.code not in RETRYABLE_HTTP_CODES or attempt >= len(RETRY_DELAYS_SECONDS):
+                raise
+            delay = RETRY_DELAYS_SECONDS[attempt]
+            retry_after = exc.headers.get("Retry-After") if exc.headers else None
+            if retry_after:
+                try:
+                    delay = max(delay, min(300, int(retry_after)))
+                except ValueError:
+                    pass
+            print(
+                f"arXiv returned HTTP {exc.code}; retrying in {delay} seconds "
+                f"({attempt + 1}/{len(RETRY_DELAYS_SECONDS)})...",
+                file=sys.stderr,
+            )
+            time.sleep(delay)
+    raise RuntimeError("unreachable")
 
 
 def load_json(path: Path, fallback: Any) -> Any:
