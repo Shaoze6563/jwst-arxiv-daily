@@ -20,9 +20,9 @@
     "JADES",
     "CEERS",
     "PRIMER",
-    "FRESCO"
-    "COSMOS"
-    "COSMOS-Web"
+    "FRESCO",
+    "COSMOS",
+    "COSMOS-Web",
     "COSMOS-3D"
   ],
   "lookback_days": 14,
@@ -46,12 +46,13 @@
     "quiescent",
     "dust attenuation",
     "metallicity",
-    "morphology"
-    "HAE"
-    "DSFGs"
-    "DSFG"
-    "Dusty star-forming galaxy"
-    "Dusty star-forming galaxies"
+    "morphology",
+    "HAE",
+    "DSFGs",
+    "DSFG",
+    "Dusty star-forming galaxy",
+    "Dusty star-forming galaxies",
+    "protocluster"
   ],
   "report_directory": "reports",
   "state_file": "data/seen.json",
